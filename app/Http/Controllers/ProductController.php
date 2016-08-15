@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Jobs\LogTextFile;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -47,13 +48,13 @@ class ProductController extends Controller
         $product = Auth::user()->products()->create($productRequest->all());
         Mail::queue('emails.created', [], function ($message) {
             $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
-
             $message->to('cconnon11@gmail.com');
         });
-        Mail::later(5, 'emails.reminder', [], function ($message) {
+        Mail::later(5000, 'emails.reminder', [], function ($message) {
             $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
             $message->to('cconnon11@gmail.com');
         });
+        $this->dispatch(new LogTextFile());
         $productRequest->session()->flash('product_update', 'Product was created in the database');
         return redirect()->action('ProductController@edit', $product->id);
 
