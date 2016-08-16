@@ -11,7 +11,10 @@ use Mockery\CountValidator\Exception;
 
 class TodoController extends Controller
 {
-    //
+    function __construct()
+    {
+        $this->middleware('hmac');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
@@ -21,6 +24,7 @@ class TodoController extends Controller
         try
         {
             $todos = Todo::all();
+
             if(count($todos) > 0) {
                 return response($todos, 200);
             }

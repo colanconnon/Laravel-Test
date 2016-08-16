@@ -14,6 +14,8 @@ class CreateApiConsumer extends Migration
     {
         Schema::create('ApiConsumer', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('public_api_key');
+            $table->string('private_api_key');
             $table->timestamps();
         });
     }
