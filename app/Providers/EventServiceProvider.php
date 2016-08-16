@@ -16,6 +16,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+        'Illuminate\Auth\Events\Login' => ['App\Listeners\UserLoginListener@onUserLogin']
     ];
 
     /**
@@ -29,5 +30,8 @@ class EventServiceProvider extends ServiceProvider
         parent::boot($events);
 
         //
+        $events->listen('auth.login', function(){
+            dd('login');
+        });
     }
 }
