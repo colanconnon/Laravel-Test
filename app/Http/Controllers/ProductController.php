@@ -84,9 +84,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        dd(ProductImagesFacade::get($id));
-        $product = Product::with('Category','Image')->where('id',$id)->first();
-        return view('products.show', compact('product'));
+        $image = ProductImagesFacade::get($id);
+        $product = Product::with('Category')->where('id',$id)->first();
+        return view('products.show', compact('product', 'image'));
     }
 
     /**

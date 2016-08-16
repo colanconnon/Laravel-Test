@@ -9,5 +9,11 @@
                 Category: {{$product->Category->name}}
             </p>
         @endif
+
+            @unless(empty($image->image_url))
+                <p>
+                    <img src="/images/{{$image->image_url}}" />
+                </p>
+                @endif
     </div>
 @stop
