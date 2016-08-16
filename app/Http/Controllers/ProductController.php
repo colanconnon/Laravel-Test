@@ -26,17 +26,28 @@ class ProductController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+
+    /**
+     * @return View
+     */
     public function index()
     {
         $products = Product::getActive();
         return view('products.index', compact('products'));
     }
 
+    /**
+     * @return View
+     */
     public function create()
     {
         return view('products.create');
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function edit($id)
     {
         $product = Product::find($id);
@@ -52,14 +63,14 @@ class ProductController extends Controller
 
         $product = Auth::user()->products()->create($productRequest->all());
 
-//        Mail::queue('emails.created', [], function ($message) {
-//            $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
-//            $message->to('cconnon11@gmail.com');
-//        });
-//        Mail::later(5000, 'emails.reminder', [], function ($message) {
-//            $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
-//            $message->to('cconnon11@gmail.com');
-//        });
+        Mail::queue('emails.created', [], function ($message) {
+            $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
+            $message->to('cconnon11@gmail.com');
+        });
+        Mail::later(5000, 'emails.reminder', [], function ($message) {
+            $message->from('postmaster@sandbox14d795b801ed403eafd82752be6a51fd.mailgun.org', 'Laravel');
+            $message->to('cconnon11@gmail.com');
+        });
         $dbImage = new Image();
         $image = Input::file('image');
 
@@ -106,6 +117,17 @@ class ProductController extends Controller
         } else {
             abort(403);
         }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->action('ProductController@index');
     }
 
 }

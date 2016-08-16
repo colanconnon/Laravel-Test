@@ -10,6 +10,7 @@
                 <p class="alert alert-success"> {{Session::get('product_update') }}</p>
             @endif
             {!! Form::model($product , ['method' => 'PUT', 'action' => ['ProductController@update' , $product->id]]) !!}
+            {{ csrf_field() }}
             <div class="form-group">
                 {!! Form::label('name', 'Name: ') !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}

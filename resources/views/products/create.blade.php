@@ -8,6 +8,7 @@
             <br />
 
             {!! Form::model($product = new \App\Product, ['url' => 'product', 'files'=>true]) !!}
+            {{ csrf_field() }}
             <div class="form-group">
                 {!! Form::label('name', 'Name: ') !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
