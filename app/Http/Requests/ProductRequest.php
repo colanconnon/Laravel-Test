@@ -25,9 +25,10 @@ class ProductRequest extends Request
     {
         return [
             //
-            'name' => 'required',
+            'name' => 'Regex:$.{3,}$',
             'price' => 'required|numeric',
-            'category_id' => 'numeric'
+            'category_id' => 'numeric|required_if:price,50',
+            'image_url' => 'url'
         ];
     }
 }

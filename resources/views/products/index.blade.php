@@ -18,6 +18,11 @@
                 <p>
                     <a href="/product/{{$product->id}}/edit">Edit</a>
                 </p>
+                @unless(count($product->Images) < 1)
+                    <p>
+                        <img src="/images/{{$product->Images[0]->image_url}}" />
+                    </p>
+                    @endif
             </div>
         @endforeach
         {{ $products->links() }}

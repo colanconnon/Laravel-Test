@@ -21,6 +21,16 @@
 
             <input type="submit" value="Update Product" id="UpdateProduct" class="btn btn-primary" />
             {!! Form::close() !!}
+            @if ($errors->any())
+                <br />
+                <br />
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
         </div>
+
     </div>
 @stop

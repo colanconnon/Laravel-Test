@@ -88,7 +88,7 @@ class TestProduct extends TestCase
         $product->name = "ProductWithCategory";
         $product->price = 12.14;
 
-        $category = new Category();
+        $category = new Category(   );
         $category->name = 'testCategory';
         $category->save();
 

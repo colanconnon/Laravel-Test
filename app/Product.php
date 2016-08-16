@@ -40,7 +40,7 @@ class Product extends Model
 
     public function scopeGetActive($query)
     {
-        return $query->with('images')->with('Category')->paginate(5);
+        return $query->with('Images')->with('Category')->paginate(5);
     }
 
     /**
