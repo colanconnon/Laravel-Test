@@ -27,3 +27,4 @@ Route::resource('product', 'ProductController');
 
 Route::resource('category', 'CategoryController');
 
+Route::resource('todo', 'TodoController');

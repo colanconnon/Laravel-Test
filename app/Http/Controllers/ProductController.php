@@ -54,6 +54,9 @@ class ProductController extends Controller
         return View('products.edit', compact('product'));
     }
 
+
+
+
     /**
      * @param ProductRequest $productRequest
      * @return mixed
