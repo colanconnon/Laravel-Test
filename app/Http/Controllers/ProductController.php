@@ -6,6 +6,8 @@ use App\Http\Requests\ProductRequest;
 use App\Image;
 use App\Jobs\LogTextFile;
 use App\Product;
+use App\ProductImages;
+use App\ProductImagesFacade;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -82,6 +84,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        dd(ProductImagesFacade::get($id));
         $product = Product::with('Category','Image')->where('id',$id)->first();
         return view('products.show', compact('product'));
     }
