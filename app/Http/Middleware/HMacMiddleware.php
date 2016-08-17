@@ -24,11 +24,13 @@ class HMacMiddleware
             //we need to get the public key to retrieve the private key
             $apiItem = ApiManagement::where('public_api_key', $input)->first();
             //then hash the data and see if it matches the data given
-            $serverHash = hash_hmac("sha256", json_encode($request->input('public_key')),$apiItem->private_api_key);
+            $data = $request->input('data');
+
+            $serverHash = hash_hmac("sha256", $data,$apiItem->private_api_key);
             if($serverHash === $hashedData) {
                 return $next($request);
             } else {
-                dd(['serverHash' => $serverHash, 'hashedData'=> $hashedData]);
+//                dd(['serverHash' => $serverHash, 'hashedData'=> $hashedData]);
                 abort('401', 'Not Authorized');
             }
 
