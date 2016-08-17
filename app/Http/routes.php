@@ -11,12 +11,13 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function() {
-    return "this is a test route"; 
+Route::get('/package', function() {
+    return view('package');
 });
 
 Route::auth();
